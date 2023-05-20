@@ -28,9 +28,9 @@ export default function Dashboard() {
 
   //using useeffect to run the fetch function on page load
   useEffect (() =>{
-    async () => {
-        await getData();
-    }
+    
+        getData();
+    
   },[])
 
   console.log(data)
