@@ -5,7 +5,7 @@ dotenv.config();
 const{Pool} = pkg;
 
 const URL= process.env.DATABASE_URL
-console.log('I am pg.pool', URL)
+
 
 
  const pool = new Pool ({
