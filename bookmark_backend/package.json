@@ -1,25 +1,42 @@
 {
   
   "name": "bookmark_backend",
+  
   "version": "1.0.0",
+  
   "description": "Bookmark Manager backend",
+  
   "main": "app.js",
+  
   "type": "module",
   
   "scripts": {
+  
+    
   "test": "echo \"Error: no test specified\" && exit 1",
-  "start": "node -r dotenv/config App.js",
-  "dev": "node nodemon -r dotenv/config App.js"
+  
+    
+  "start": "node -r dotenv/config app.js"
+  
   },
   
   "repository": {
+  
+    
   "type": "git",
+  
+    
   "url": "git+https://github.com/tariba/bookmarkManager.git"
+  
   },
   
   "author": "Tariq",
+  
   "license": "ISC",
+  
   "bugs": {
+  
+    
   "url": "https://github.com/tariba/bookmarkManager/issues"
   
   },
@@ -27,10 +44,17 @@
   "homepage": "https://github.com/tariba/bookmarkManager#readme",
   
   "dependencies": {
+  
+    
   "cors": "^2.8.5",
+  
+    
   "dotenv": "^16.0.3",
+  
+    
   "express": "^4.18.2",
-  "nodemon": "^2.0.22",
+  
+    
   "pg": "^8.11.0"
   
   }
