@@ -24,7 +24,7 @@ export default function Form (props) {
             <input type="text" id= "search" placeholder="Link..."value = {inputValue.link} onChange = {HandleChange} name="link" />
             </label>
             <br></br>
-            <button type='submit' className="form-submit-button" onClick={(e)=>{props.handleSubmitButton(e, inputValue)}}>Submit</button> 
+            <button type='submit' className="form-submit-button" onClick={(e)=>{props.handleSubmitButton(e, inputValue, setInputValue)}}>Submit</button> 
         </form>
         </>
     )

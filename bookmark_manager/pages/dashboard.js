@@ -44,12 +44,14 @@ export default function Dashboard() {
     await getData()
   }
 
-  async function handleSubmitButton (e, inputValue) {
+  async function handleSubmitButton (e, inputValue, setInputValue) {
     e.preventDefault()
     const data = inputValue
     console.log(data)
     await axios.post('https://average-sombrero-crab.cyclic.app/bookmark', data)
     await getData()
+    setInputValue({title: "",
+    link: ""})
   }
  
  function handleSearch (e) {
