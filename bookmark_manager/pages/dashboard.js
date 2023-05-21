@@ -8,8 +8,25 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import SearchBox from "../components/search";
 import Form from "../components/form";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { purple, red, grey } from '@mui/material/colors';
 
+const useStyles = makeStyles({
+  gridContainer: {
+    paddingLeft: "20px",
+    paddingRight: "20px"
+  }
+})
 export default function Dashboard() {
+  const classes = useStyles()
   const [data, setdata] = useState([]);
   const [filterData, setFilterData] = useState([])
   const { user, error, isLoading } = useUser();
@@ -78,18 +95,45 @@ export default function Dashboard() {
     
     <SearchBox handleSearch={handleSearch}/>
         
-        {filterData && filterData.map((data) => {
+        {/* {filterData && filterData.map((data) => {
           return (
             <li className="list" key={data.id}>
               {data.title}
               <a target="_blank " href={data.link}>
                 <button className="button">Click Here!</button>
               </a>
+              
               <button className="delete" key={data.id} type="click" onClick={()=>handleDeleteButton(data.id)}><DeleteIcon/></button>
+                
             </li>
           );
+        })} */}
+
+        <Grid container spacing={4} className={classes.gridContainer} justify="center">
+        
+        
+        {filterData && filterData.map((data) => {
+          return (
+            <Grid item xs={12} sm={6} >
+            <Card sx={{ minWidth: 200, backgroundColor: grey[100], "&:hover": { transform: "scale3d(1.05, 1.05, 1)" } }}>
+            <CardContent>
+            <Typography key = {data.id} gutterBottom variant="h5" component="div">
+              {data.title}
+            </Typography>
+        </CardContent>
+        <CardActions>
+        <Button  href= {data.link} size="small">Click Here!</Button>
+        <Button key={data.id} onClick={()=>handleDeleteButton(data.id)} size="small">Delete</Button>
+      </CardActions>
+      </Card>
+      </Grid>
+          )
+
+
         })}
+        
       
+    </Grid>
         
       </>
   );
