@@ -18,7 +18,7 @@ export default function Dashboard() {
     try {
         const bookmark= await axios.get('https://average-sombrero-crab.cyclic.app/bookmark');
         console.log(bookmark.data.payload)
-        bookmark.then(setdata(bookmark.data.payload)) 
+        setdata(bookmark.data.payload)
     } catch (err) {
         console.log(err)
     }
@@ -26,7 +26,7 @@ export default function Dashboard() {
     // setFilterData(bookmark.payload)
   };
 
-  //using useeffect to run the fetch function on page load
+//   using useeffect to run the fetch function on page load
   useEffect (() =>{
     
         getData();
@@ -34,22 +34,22 @@ export default function Dashboard() {
   },[])
 
   console.log(data)
-  async function deleteDataByID(id) {
-    await axios.delete(`https://average-sombrero-crab.cyclic.app/bookmark/${id}`)
-  }
+//   async function deleteDataByID(id) {
+//     await axios.delete(`https://average-sombrero-crab.cyclic.app/bookmark/${id}`)
+//   }
 
-  async function handleDeleteButton (e) {
-    console.log(e)
-    await deleteDataByID(e)
-    await getData()
-  }
+//   async function handleDeleteButton (e) {
+//     console.log(e)
+//     await deleteDataByID(e)
+//     await getData()
+//   }
 
-  async function handleSubmitButton (e) {
-    const data = e
-    console.log(data)
-    await axios.post('https://average-sombrero-crab.cyclic.app/bookmark', data)
-    await getData()
-  }
+//   async function handleSubmitButton (e) {
+//     const data = e
+//     console.log(data)
+//     await axios.post('https://average-sombrero-crab.cyclic.app/bookmark', data)
+//     await getData()
+//   }
  
 //  function handleSearch (e) {
 //     const value = e.target.value
@@ -57,19 +57,19 @@ export default function Dashboard() {
 //   }
 
   return (
-    <div className="App">
+    <>
     <div className="dashboard">
     <div className="profile">
-            {user && <img src={user.picture} alt={user.name} />}
-            {/* <h2>{user.name}</h2> */}
-            {/* <p>{user.email}</p> */}
-            
+            {user && 
+            <img src={user.picture} alt={user.name} />
+             
+            }
         </div>
-    <div className="logout">
+    <div className="logout"> 
         <Logout/>
+     </div>
     </div>
-    </div>
-    <ol>
+        
         {data && data.map((data) => {
           return (
             <li className="list" key={data.id}>
@@ -77,13 +77,13 @@ export default function Dashboard() {
               <a target="_blank " href={data.link}>
                 <button className="button">Click Here!</button>
               </a>
-              <button key={data.id} type="click" onClick={()=>handleDeleteButton(data.id)}><DeleteIcon/></button>
+              <button className="delete" key={data.id} type="click" onClick={()=>handleDeleteButton(data.id)}><DeleteIcon/></button>
             </li>
           );
         })}
-      </ol>
+      
         
-    </div>
+      </>
   );
 }
 
