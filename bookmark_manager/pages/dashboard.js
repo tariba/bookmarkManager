@@ -6,10 +6,11 @@ import axios from 'axios'
 import Logout from "../components/logout";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import SearchBox from "../components/search";
 
 export default function Dashboard() {
   const [data, setdata] = useState([]);
-//   const [filterData, setFilterData] = useState([])
+  const [filterData, setFilterData] = useState([])
   const { user, error, isLoading } = useUser();
 
 
@@ -19,11 +20,11 @@ export default function Dashboard() {
         const bookmark=  await axios.get('https://average-sombrero-crab.cyclic.app/bookmark');
         console.log(bookmark.data.payload)
         setdata(bookmark.data.payload)
+        setFilterData(bookmark.data.payload)
     } catch (err) {
         console.log(err)
     }
     
-    // setFilterData(bookmark.payload)
   };
 
 //   using useeffect to run the fetch function on page load
@@ -50,6 +51,7 @@ export default function Dashboard() {
   }
  
  function handleSearch (e) {
+    console.log(e.target.value)
     const value = e.target.value
     setFilterData(data.filter((item) =>{ return   item.title.toLowerCase().includes(value.toLowerCase())}))
   }
@@ -67,8 +69,9 @@ export default function Dashboard() {
         <Logout/>
      </div>
     </div>
+    <SearchBox handleSearch={handleSearch}/>
         
-        {data && data.map((data) => {
+        {filterData && filterData.map((data) => {
           return (
             <li className="list" key={data.id}>
               {data.title}
