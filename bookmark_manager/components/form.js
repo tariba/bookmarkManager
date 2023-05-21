@@ -1,7 +1,15 @@
 import {useState} from "react"
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 export default function Form (props) {
-    
+    const [open, setOpen] = useState(false);
     const [inputValue, setInputValue] = useState({
         title: "",
         link: ""
@@ -14,18 +22,55 @@ export default function Form (props) {
         
     }
 
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+
     return (
         <>  
-        <form className="form-wrapper">
-            <label>    
-            <input type="text" id= "search" placeholder="title..." value ={inputValue.title} onChange={HandleChange} name="title" />
-            </label>
-            <label>
-            <input type="text" id= "search" placeholder="Link..."value = {inputValue.link} onChange = {HandleChange} name="link" />
-            </label>
-            <br></br>
-            <button type='submit' className="form-submit-button" onClick={(e)=>{props.handleSubmitButton(e, inputValue, setInputValue)}}>Submit</button> 
-        </form>
+        <div>
+      <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
+       Add Bookmark
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Add Bookmark</DialogTitle>
+        <DialogContent>
+          
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Title..."
+            type="email"
+            fullWidth
+            name="title"
+            variant="standard"
+            value ={inputValue.title} onChange={HandleChange}
+          />
+        <TextField
+            autoFocus
+            margin="dense"
+            id="link"
+            label="Link..."
+            type="email"
+            fullWidth
+            variant="standard"
+            value = {inputValue.link}
+            onChange={HandleChange}
+            name="link" 
+          />  
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={(e)=>{props.handleSubmitButton(e, inputValue, setInputValue, setOpen)}}>Add</Button>
+          <Button onClick={handleClose}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+        
         </>
     )
 }

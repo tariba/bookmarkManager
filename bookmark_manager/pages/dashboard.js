@@ -111,7 +111,7 @@ export default function Dashboard() {
     await getData()
   }
 
-  async function handleSubmitButton (e, inputValue, setInputValue) {
+  async function handleSubmitButton (e, inputValue, setInputValue, setOpen) {
     e.preventDefault()
     const data = inputValue
     console.log(data)
@@ -119,6 +119,7 @@ export default function Dashboard() {
     await getData()
     setInputValue({title: "",
     link: ""})
+    setOpen(false)
   }
  
  function handleSearch (e) {
@@ -146,14 +147,15 @@ export default function Dashboard() {
           >
           
           </Typography>
-    <Button color="inherit"><Logout/></Button>
+          <Form handleSubmitButton={handleSubmitButton}/>
+          <Button color="inherit"><Logout/></Button>
           
         </Toolbar>
       </AppBar>
     </Box>
     
     
-    <Form handleSubmitButton={handleSubmitButton}/>
+    
     
         <Grid container spacing={4} className={classes.gridContainer} justify="center">
         
