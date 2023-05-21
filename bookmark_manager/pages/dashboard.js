@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 // import UserDashboard from "../UserDashboard/userDashboard";
 import axios from 'axios'
 import Logout from "../components/logout";
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import SearchBox from "../components/search";
 import Form from "../components/form";
@@ -12,12 +11,63 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { purple, red, grey } from '@mui/material/colors';
+import {  grey } from '@mui/material/colors';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { styled, alpha } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import InputBase from '@mui/material/InputBase';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -80,34 +130,29 @@ export default function Dashboard() {
   if (error) return <div>{error.message}</div>;
   return (
     <>
-    <div className="dashboard">
-    <div className="profile">
-            {user && 
-            <img src={user.picture} alt={user.name} />
-             
-            }
-        </div>
-    <div className="logout"> 
-        <Logout/>
-     </div>
-    </div>
-    <Form handleSubmitButton={handleSubmitButton}/>
-    
+    <Box sx={{ flexGrow: 1, position:"sticky" }} position="sticky">
+      <AppBar >
+        <Toolbar>
+          <Stack direction="row" spacing={1}>
+      <Avatar src ={user.picture} />
+      
+    </Stack>
     <SearchBox handleSearch={handleSearch}/>
-        
-        {/* {filterData && filterData.map((data) => {
-          return (
-            <li className="list" key={data.id}>
-              {data.title}
-              <a target="_blank " href={data.link}>
-                <button className="button">Click Here!</button>
-              </a>
-              
-              <button className="delete" key={data.id} type="click" onClick={()=>handleDeleteButton(data.id)}><DeleteIcon/></button>
-                
-            </li>
-          );
-        })} */}
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
+          
+          </Typography>
+    <Button color="inherit"><Logout/></Button>
+          
+        </Toolbar>
+      </AppBar>
+    </Box>
+    
+    <Form handleSubmitButton={handleSubmitButton}/>
 
         <Grid container spacing={4} className={classes.gridContainer} justify="center">
         

@@ -1,3 +1,7 @@
+import Button from '@mui/material/Button';
+
 export default function Logout() {
-    return <a href="/api/auth/logout" className="LoginButton">Logout</a>;
+    return (
+      <Button color="inherit" a href="/api/auth/logout">Logout</Button>
+    );
   }
