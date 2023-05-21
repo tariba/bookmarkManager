@@ -14,9 +14,9 @@ export default function Dashboard() {
 
 
   //function to fetch the data from the backend and save it in data state
-   async function getData ()  {
+    const getData =  async ()=>  {
     try {
-        const bookmark= await axios.get('https://average-sombrero-crab.cyclic.app/bookmark');
+        const bookmark=  await axios.get('https://average-sombrero-crab.cyclic.app/bookmark');
         console.log(bookmark.data.payload)
         setdata(bookmark.data.payload)
     } catch (err) {
@@ -28,33 +28,31 @@ export default function Dashboard() {
 
 //   using useeffect to run the fetch function on page load
   useEffect (() =>{
-    
         getData();
-    
   },[])
 
   console.log(data)
-//   async function deleteDataByID(id) {
-//     await axios.delete(`https://average-sombrero-crab.cyclic.app/bookmark/${id}`)
-//   }
+  async function deleteDataByID(id) {
+    await axios.delete(`https://average-sombrero-crab.cyclic.app/bookmark/${id}`)
+  }
 
-//   async function handleDeleteButton (e) {
-//     console.log(e)
-//     await deleteDataByID(e)
-//     await getData()
-//   }
+  async function handleDeleteButton (e) {
+    console.log(e)
+    await deleteDataByID(e)
+    await getData()
+  }
 
-//   async function handleSubmitButton (e) {
-//     const data = e
-//     console.log(data)
-//     await axios.post('https://average-sombrero-crab.cyclic.app/bookmark', data)
-//     await getData()
-//   }
+  async function handleSubmitButton (e) {
+    const data = e
+    console.log(data)
+    await axios.post('https://average-sombrero-crab.cyclic.app/bookmark', data)
+    await getData()
+  }
  
-//  function handleSearch (e) {
-//     const value = e.target.value
-//     setFilterData(data.filter((item) =>{ return   item.title.toLowerCase().includes(value.toLowerCase())}))
-//   }
+ function handleSearch (e) {
+    const value = e.target.value
+    setFilterData(data.filter((item) =>{ return   item.title.toLowerCase().includes(value.toLowerCase())}))
+  }
 
   return (
     <>
