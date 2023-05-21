@@ -131,8 +131,8 @@ export default function Dashboard() {
   if (error) return <div>{error.message}</div>;
   return (
     <>
-    <Box sx={{ flexGrow: 1, position:"sticky" }} position="sticky">
-      <AppBar >
+    <Box sx={{ flexGrow: 1, }} >
+      <AppBar  >
         <Toolbar>
           <Stack direction="row" spacing={1}>
       <Avatar src ={user.picture} />
@@ -156,10 +156,11 @@ export default function Dashboard() {
     
     
     
-    
-        <Grid container spacing={4} className={classes.gridContainer} justify="center">
-        
-        
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+        <Grid container spacing={4} className={classes.gridContainer} >
         {filterData && filterData.map((data) => {
           return (
             <Grid item xs={12} sm={6} >
