@@ -171,8 +171,9 @@ export default function Dashboard() {
             </Typography>
         </CardContent>
         <CardActions>
-        <Button  href= {data.link} size="small">Click Here!</Button>
-        <Button key={data.id} onClick={()=>handleDeleteButton(data.id)} size="small">Delete</Button>
+        <Button  className={classes.button} variant="outlined" href= {data.link} size="small">Click Here!</Button>
+        <Box flexGrow={1} />
+        <Button className={classes.button} variant="outlined" key={data.id} onClick={()=>handleDeleteButton(data.id)} size="small">Delete</Button>
       </CardActions>
       </Card>
       </Grid>
