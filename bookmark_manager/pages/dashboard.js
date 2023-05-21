@@ -7,6 +7,7 @@ import Logout from "../components/logout";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import SearchBox from "../components/search";
+import Form from "../components/form";
 
 export default function Dashboard() {
   const [data, setdata] = useState([]);
@@ -43,8 +44,9 @@ export default function Dashboard() {
     await getData()
   }
 
-  async function handleSubmitButton (e) {
-    const data = e
+  async function handleSubmitButton (e, inputValue) {
+    e.preventDefault()
+    const data = inputValue
     console.log(data)
     await axios.post('https://average-sombrero-crab.cyclic.app/bookmark', data)
     await getData()
@@ -55,7 +57,8 @@ export default function Dashboard() {
     const value = e.target.value
     setFilterData(data.filter((item) =>{ return   item.title.toLowerCase().includes(value.toLowerCase())}))
   }
-
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
   return (
     <>
     <div className="dashboard">
@@ -69,6 +72,8 @@ export default function Dashboard() {
         <Logout/>
      </div>
     </div>
+    <Form handleSubmitButton={handleSubmitButton}/>
+    
     <SearchBox handleSearch={handleSearch}/>
         
         {filterData && filterData.map((data) => {

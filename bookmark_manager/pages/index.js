@@ -11,10 +11,12 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
+  console.log(isLoading)
+  
   return (
     <div className='main'>
        <h1 className='header'>Welcome to your Bookmark Manager</h1>
-    
+       {isLoading &&  <div>Loading...</div>}
         {user? router.push('/dashboard'): <Login/>}
       
 
