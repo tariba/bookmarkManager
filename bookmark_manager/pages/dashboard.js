@@ -138,7 +138,10 @@ export default function Dashboard() {
       <Avatar src ={user.picture} />
       
     </Stack>
+    
     <SearchBox handleSearch={handleSearch}/>
+    
+    
           <Typography
             variant="h6"
             noWrap
